@@ -34,25 +34,42 @@
             <label>Your User ID</label>
         </div>
         <div class="form__control form__location">
-            <div class="form__location--state" [ngSwitch]="this.signUpForm.get('country').value === 'USA'">
+            <div class="form__location--state" [ngSwitch]="this.signUpForm.get('country').value">
                 <span>State</span>
-                <select name="state" formControlName="state" *ngSwitchCase="true">
+                <select name="state" formControlName="state" *ngSwitchCase="'USA'">
                     <option [value]="null" disabled>Choose your state</option>
                     <option *ngFor="let state of statesUSA"  [value]="state.value">{{ state.value }}</option>
                 </select>
-                <select name="state" formControlName="state" *ngSwitchCase="false">
+                <select name="state" formControlName="state" *ngSwitchCase="'India'">
                     <option [value]="null" disabled>Choose your state</option>
                     <option *ngFor="let state of statesIndia"  [value]="state.value">{{ state.value }}</option>
                 </select>
-                <select name="state" formControlName="state" *ngSwitchDefault>
+                <select name="state" formControlName="state" *ngSwitchCase="undefined">
                     <option [value]="null" disabled>Choose your state</option>
                 </select>
             </div>
-            <div class="form__location--city">
-                <span>City</span>
-                <select name="city" formControlName="city">
-                </select>
-            </div>
+            <div class="form__location--city" [ngSwitch]="this.signUpForm.get('state').value">  
+                    <span>State</span>
+                    <select name="city" formControlName="city" *ngSwitchCase="'New York'">
+                        <option [value]="null" disabled>Choose your city</option>
+                        <option *ngFor="let city of citiesNY"  [value]="city.value">{{ city.value }}</option>
+                    </select>
+                    <select name="city" formControlName="city" *ngSwitchCase="'California'">
+                        <option [value]="null" disabled>Choose your city</option>
+                        <option *ngFor="let city of citiesCali"  [value]="city.value">{{ city.value }}</option>
+                    </select>
+                    <select name="city" formControlName="city" *ngSwitchCase="'Andhra Pradesh'">
+                        <option [value]="null" disabled>Choose your city</option>
+                        <option *ngFor="let city of citiesAndhra"  [value]="city.value">{{ city.value }}</option>
+                    </select>
+                    <select name="city" formControlName="city" *ngSwitchCase="'Andhra Pradesh'">
+                        <option [value]="null" disabled>Choose your city</option>
+                        <option *ngFor="let city of citiesGoa"  [value]="city.value">{{ city.value }}</option>
+                    </select>
+                    <select name="city" formControlName="city" *ngSwitchCase="undefined">
+                        <option [value]="null" disabled>Choose your state first</option>
+                    </select>
+                </div>
         </div>
         <div class="form__control form__code">
             <input type="text" name="code" required formControlName="code">

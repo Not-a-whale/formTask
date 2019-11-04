@@ -16,6 +16,11 @@ export class FormComponent implements OnInit {
   statesUSA = [new FormControl('New York'), new FormControl('California')];
   statesIndia = [new FormControl('Andhra Pradesh'), new FormControl('Goa')]
 
+  citiesNY = [new FormControl('Albany'), new FormControl('New York City')];
+  citiesCali = [new FormControl('Sacramento'), new FormControl('Los Angeles'), new FormControl('San Francisco')];
+  citiesAndhra = [new FormControl('Visakhapatnam'), new FormControl('Amaravati')];
+  citiesGoa = [new FormControl('Panaji'), new FormControl('Vasco da Gama')];
+
   constructor() { }
 
   ngOnInit() {
@@ -26,8 +31,8 @@ export class FormComponent implements OnInit {
       'phone': new FormControl(null),
       'lastName': new FormControl(null),
       'id': new FormControl(null),
-      'state': new FormControl('USA'),
-      'city': new FormArray([]),
+      'state': new FormControl(),
+      'city': new FormControl(),
       'code': new FormControl(null)
     })
   }
