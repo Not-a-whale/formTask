@@ -14,6 +14,7 @@ export class FormComponent implements OnInit {
   ];
 
   statesUSA = [new FormControl('New York'), new FormControl('California')];
+  statesIndia = [new FormControl('Andhra Pradesh'), new FormControl('Goa')]
 
   constructor() { }
 

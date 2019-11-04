@@ -34,11 +34,18 @@
             <label>Your User ID</label>
         </div>
         <div class="form__control form__location">
-            <div class="form__location--state">
+            <div class="form__location--state" [ngSwitch]="this.signUpForm.get('country').value === 'USA'">
                 <span>State</span>
-                <select name="state" formControlName="state" *ngIf="this.signUpForm.get('country').value === 'USA'">
+                <select name="state" formControlName="state" *ngSwitchCase="true">
                     <option [value]="null" disabled>Choose your state</option>
-                    <option  *ngFor="let state of statesUSA"  [value]="state.value">{{ state.value }}</option>
+                    <option *ngFor="let state of statesUSA"  [value]="state.value">{{ state.value }}</option>
+                </select>
+                <select name="state" formControlName="state" *ngSwitchCase="false">
+                    <option [value]="null" disabled>Choose your state</option>
+                    <option *ngFor="let state of statesIndia"  [value]="state.value">{{ state.value }}</option>
+                </select>
+                <select name="state" formControlName="state" *ngSwitchDefault>
+                    <option [value]="null" disabled>Choose your state</option>
                 </select>
             </div>
             <div class="form__location--city">
