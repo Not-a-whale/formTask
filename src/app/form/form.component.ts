@@ -8,7 +8,10 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   signUpForm: FormGroup;
-  countries = ['USA', 'India'];
+  countries = [
+    new FormControl('USA'),
+    new FormControl('India')
+  ];
 
   constructor() { }
 
@@ -16,7 +19,7 @@ export class FormComponent implements OnInit {
     this.signUpForm = new FormGroup({
       'firstName': new FormControl(null),
       'email': new FormControl(null),
-      'formCountries': new FormArray([]),
+      'country': new FormControl(null),
       'phone': new FormControl(null),
       'lastName': new FormControl(null),
       'id': new FormControl(null),

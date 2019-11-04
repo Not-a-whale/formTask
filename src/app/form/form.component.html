@@ -11,8 +11,9 @@
         </div>
         <div class="form__control form__country">
             <span>Country</span>
-            <select name="country">
-                <option [value]="country" formControlName="country" *ngFor="let country of countries">{{ country }}</option>
+            <select name="country" formControlName="country">
+                <option [value]="null" disabled>Choose your country</option>
+                <option [value]="country"  *ngFor="let country of countries">{{ country.value }}</option>
             </select>
         </div>
         <div class="form__control form__phone">
