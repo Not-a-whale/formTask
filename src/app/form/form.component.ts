@@ -25,7 +25,7 @@ export class FormComponent implements OnInit {
       'phone': new FormControl(null),
       'lastName': new FormControl(null),
       'id': new FormControl(null),
-      'state': new FormControl(),
+      'state': new FormControl('USA'),
       'city': new FormArray([]),
       'code': new FormControl(null)
     })
