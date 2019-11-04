@@ -13,7 +13,7 @@
             <span>Country</span>
             <select name="country" formControlName="country">
                 <option [value]="null" disabled>Choose your country</option>
-                <option [value]="country"  *ngFor="let country of countries">{{ country.value }}</option>
+                <option  *ngFor="let country of countries"  [value]="country.value">{{ country.value }}</option>
             </select>
         </div>
         <div class="form__control form__phone">
@@ -36,7 +36,9 @@
         <div class="form__control form__location">
             <div class="form__location--state">
                 <span>State</span>
-                <select name="state" formControlName="control">
+                <select name="state" formControlName="state" *ngIf="this.signUpForm.get('country').value === 'USA'">
+                    <option [value]="null" disabled>Choose your state</option>
+                    <option  *ngFor="let state of statesUSA"  [value]="state.value">{{ state.value }}</option>
                 </select>
             </div>
             <div class="form__location--city">

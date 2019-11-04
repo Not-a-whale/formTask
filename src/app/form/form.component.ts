@@ -13,6 +13,8 @@ export class FormComponent implements OnInit {
     new FormControl('India')
   ];
 
+  statesUSA = [new FormControl('New York'), new FormControl('California')];
+
   constructor() { }
 
   ngOnInit() {
@@ -23,10 +25,17 @@ export class FormComponent implements OnInit {
       'phone': new FormControl(null),
       'lastName': new FormControl(null),
       'id': new FormControl(null),
-      'state': new FormArray([]),
+      'state': new FormControl(),
       'city': new FormArray([]),
       'code': new FormControl(null)
     })
   }
 
+  onSubmit() {
+
+  }
+   
+  onReset() {
+
+  }
 }
