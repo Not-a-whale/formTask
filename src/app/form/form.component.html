@@ -62,7 +62,7 @@
                         <option [value]="null" disabled>Choose your city</option>
                         <option *ngFor="let city of citiesAndhra"  [value]="city.value">{{ city.value }}</option>
                     </select>
-                    <select name="city" formControlName="city" *ngSwitchCase="'Andhra Pradesh'">
+                    <select name="city" formControlName="city" *ngSwitchCase="'Goa'">
                         <option [value]="null" disabled>Choose your city</option>
                         <option *ngFor="let city of citiesGoa"  [value]="city.value">{{ city.value }}</option>
                     </select>
