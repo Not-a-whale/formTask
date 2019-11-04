@@ -1,1 +1,55 @@
-<p>form works!</p>
+<h2>Basic Details</h2>
+<form class="form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <div class="form__group left">
+        <div class="form__control form__first-name">
+            <input type="text" name="Fname" required formControlName="">
+            <label>First Name</label>
+        </div>
+        <div class="form__control form__email">
+            <input type="email" name="email" required formControlName="email">
+            <label>Email ID</label>
+        </div>
+        <div class="form__control form__country">
+            <span>Country</span>
+            <select name="country">
+                <option [value]="country" formControlName="country" *ngFor="let country of countries">{{ country }}</option>
+            </select>
+        </div>
+        <div class="form__control form__phone">
+            <input type="number" name="phone" required formControlName="phone">
+            <label>Phone Number</label>
+        </div>
+        <div class="form__control form__button--reset">
+            <button type="button" (click)="onReset()">Reset All</button>
+        </div>
+    </div>
+    <div class="form__group right">
+        <div class="form__control form__last-name">
+            <input type="text" name="Lname" required formControlName="lastName">
+            <label>Last Name</label>
+        </div>
+        <div class="form__control form__ID">
+            <input type="text" name="ID" required formControlName="id">
+            <label>Your User ID</label>
+        </div>
+        <div class="form__control form__location">
+            <div class="form__location--state">
+                <span>State</span>
+                <select name="state" formControlName="control">
+                </select>
+            </div>
+            <div class="form__location--city">
+                <span>City</span>
+                <select name="city" formControlName="city">
+                </select>
+            </div>
+        </div>
+        <div class="form__control form__code">
+            <input type="text" name="code" required formControlName="code">
+            <label>Reference Code</label>
+        </div>
+        <div class="form__control form__button--submit">
+            <button type="submit">Continue</button>
+        </div>
+    </div>
+</form>

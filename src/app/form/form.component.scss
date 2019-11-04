@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+}
+h2 {
+    font-size: 2.4rem;
+    font-family: 'ProximaNovaSemibold', sans-serif;
+    color: #3897d9;
+    margin: 4rem;
+}
+
+/* Form styles */
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 4rem;
+    margin: 4rem;
+    padding: 0;
+
+    div {
+        position: relative;
+
+        input {
+            position: relative;
+            margin: 1.2rem 0;
+            padding: 0 0 .5rem 0;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: none;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid #d8d8d8;
+            color: #333333;
+            transition: .5s all ease;
+            font-size: 1.2rem;
+
+            &:focus ~ label,
+            &:valid ~ label {
+                top: -.2rem;
+                left: 0;
+                font-size: .8rem;
+                color: #48a5ea;
+            }
+
+            &:focus {
+                border-bottom: 1px solid #48a5ea;
+            }
+        }
+
+        label {
+            position: absolute;
+            top: 1.2rem;
+            left: 0;
+            font-size: 1.2rem;
+            color: #333333;
+            z-index: 1;
+            pointer-events: none;
+            transition: all .5s ease;
+        }
+    }
+
+    &__location {
+        display: flex;
+        flex-direction: row;
+        
+        div {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            span {
+                position: absolute;
+                font-size: 0.8rem;
+            }
+            select {
+                margin-top: .82rem;
+                margin-bottom: .82rem;
+                width: 100%;
+                border: none;
+                outline: none;
+                height: 2.7rem;
+            }
+        }
+    }
+
+    &__country {
+        display: flex;
+        flex-direction: row;
+        span {
+            position: absolute;
+            font-size: 0.8rem;
+        }
+
+        select {
+            position: relative;
+            margin-top: .82rem;
+            margin-bottom: .82rem;
+            width: 100%;
+            border: none;
+            outline: none;
+            height: 2.7rem;
+            border-bottom: 1px solid #d8d8d8;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+
+            &::after {
+                content: 'pisya';
+                position: absolute;
+                right: 50%;
+                top: 50%;
+            }
+
+            option {
+                width: 100%;
+            }
+        }
+    }
+}
