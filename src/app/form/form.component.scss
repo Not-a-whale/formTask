@@ -5,17 +5,83 @@ h2 {
     font-size: 2.4rem;
     font-family: 'ProximaNovaSemibold', sans-serif;
     color: #3897d9;
-    margin: 4rem;
+    margin: 2rem;
 }
 
 /* Form styles */
 
 .form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 4rem;
-    margin: 4rem;
+    display: flex;
+    margin: 2rem;
     padding: 0;
+    flex-direction: column;
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        @media screen and (min-width: 700px) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form__control {
+            width: 100%;
+            @media screen and (min-width: 700px) {
+                width: 48%;
+            }
+        }
+
+        &--buttons {
+           margin-top: 5rem;
+
+           display: flex;
+           flex-direction: row;
+           justify-content: space-between;
+
+           &-submit {
+               background-color: #48a5ea;
+               height: 3rem;
+               width: 9rem;
+               color: #fff;
+               font-size: 1rem;
+               text-align: center;
+               line-height: 3rem;
+               border-radius: 5rem;
+               cursor: pointer;
+               transition: all .5s ease;
+               padding: 0;
+                border: none;
+                outline: none;
+
+               &:hover {
+                    transform: scale(1.02);
+                    box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, .3);
+               }
+
+               &:active {
+                   transform: scale(0.9);
+                   box-shadow: none;
+               }
+           }
+
+           &-reset {
+            color: #b8b8b8;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: .5s all ease;
+
+            &:hover {
+                color: #48a5ea;
+            }
+           }
+        }
+    }
+
+
 
     div {
         position: relative;
@@ -34,16 +100,50 @@ h2 {
             transition: .5s all ease;
             font-size: 1.2rem;
 
-            &:focus ~ label,
-            &:valid ~ label {
+            &:not(.ref-code).ng-invalid.ng-touched {
+                &:focus ~ label,
+                &:valid ~ label {
+                    color: red;
+                }
+
+                ~ label {
+                    color: red;
+                }
+
+                border-bottom: 1px solid red;
+            }
+
+            &:focus ~ label {
                 top: -.2rem;
                 left: 0;
                 font-size: .8rem;
                 color: #48a5ea;
             }
 
+            &:not(.ref-code):valid ~ label {
+                top: -.2rem;
+                left: 0;
+                font-size: .8rem;
+                color: #b8b8b8;
+            }
+
             &:focus {
                 border-bottom: 1px solid #48a5ea;
+            }
+            &:valid {
+                border-bottom: 1px solid #b8b8b8;
+            }
+
+            &.ref-code {
+                &.ng-touched.ng-dirty{
+                    &:focus ~ label,
+                    &:valid ~ label {
+                        top: -.2rem;
+                        left: 0;
+                        font-size: .8rem;
+                        color: #48a5ea;
+                    }
+                }
             }
         }
 
@@ -61,27 +161,82 @@ h2 {
 
     &__location {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        @media screen and (min-width: 1000px) {
+            flex-direction: row;
+        }
         
         div {
             display: flex;
             flex-direction: column;
-            width: 50%;
             span {
                 position: absolute;
                 font-size: 0.8rem;
+                z-index: 5;
             }
+
             select {
-                margin-top: .82rem;
+                position: relative;
+                margin-top: .62rem;
                 margin-bottom: .82rem;
                 width: 100%;
                 border: none;
                 outline: none;
                 height: 2.7rem;
-
+                appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                border-bottom: 1px solid #d8d8d8;
+                font-size: 1rem;
+                color: #333333;
+                cursor: pointer;
                 option {
+                    width: 80vw;
+                    cursor: pointer;
 
+                    @media screen and (min-width: 1000px) {
+                        width: 100%;
+                    }
                 }
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                height: .3rem;
+                width: .3rem;
+                border-top: 1px solid #333333;
+                border-left: 1px solid #333333;
+                z-index: 4;
+                position: absolute;
+                top: 50%;
+                right: .5rem;
+                transform: translateY(-50%) rotate(-135deg);
+                transition: all .4s ease-in-out;
+            }
+
+            &:hover::after {
+                transform: rotate(45deg);
+            }
+        }
+
+        &--state {
+            width: 100%;
+            margin: 0;
+            cursor: pointer;
+            @media screen and (min-width: 1000px) {
+                width: 45%;
+            }
+        }
+
+        &--city {
+            margin: 0;
+            width: 100%;
+            cursor: pointer;
+            @media screen and (min-width: 1000px) {
+                width: 45%;
             }
         }
     }
@@ -89,6 +244,7 @@ h2 {
     &__country {
         display: flex;
         flex-direction: row;
+
         span {
             position: absolute;
             font-size: 0.8rem;
@@ -107,7 +263,21 @@ h2 {
             appearance: none;
             -moz-appearance: none;
             -webkit-appearance: none;
+            font-size: 1rem;
             cursor: pointer;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: .5rem;
+            transform: translateY(-50%) rotate(45deg);
+            width: .3rem;
+            height: .3rem;
+            border-bottom: 1px solid #333333;
+            border-right: 1px solid #333333;
+            pointer-events: none;
         }
     }
 }

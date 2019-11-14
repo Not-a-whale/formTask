@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -13,6 +13,18 @@ export class FormComponent implements OnInit {
     new FormControl('India')
   ];
 
+  savedForm: {
+    city: string,
+    code: number,
+    country: string,
+    email: string,
+    firstName: string,
+    id: string,
+    lastName: string,
+    phone: number,
+    state: string;
+  }
+
   statesUSA = [new FormControl('New York'), new FormControl('California')];
   statesIndia = [new FormControl('Andhra Pradesh'), new FormControl('Goa')]
 
@@ -21,27 +33,51 @@ export class FormComponent implements OnInit {
   citiesAndhra = [new FormControl('Visakhapatnam'), new FormControl('Amaravati')];
   citiesGoa = [new FormControl('Panaji'), new FormControl('Vasco da Gama')];
 
+  @ViewChild('phoneInput', {static: false}) phoneInput: ElementRef;
+  public mask:any = {
+    mask: '+{38}(0__)000-00-00',
+    lazy: false
+  }
+
   constructor() { }
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
-      'firstName': new FormControl(null),
-      'email': new FormControl(null),
-      'country': new FormControl(null),
+      'firstName': new FormControl(null, [Validators.required, Validators.pattern(/^[а-яА-ЯёЁіІїЇ]{2,32}$/iu)]),
+      'email': new FormControl(null, [Validators.required, Validators.email, Validators.pattern(/^\S{2,255}@\S+\.\S+$/iu)]),
+      'country': new FormControl(null, Validators.required),
       'phone': new FormControl(null),
-      'lastName': new FormControl(null),
-      'id': new FormControl(null),
-      'state': new FormControl(),
-      'city': new FormControl(),
-      'code': new FormControl(null)
-    })
+      'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[а-яА-ЯёЁіІїЇ]{2,32}$/iu)]),
+      'id': new FormControl(null, [Validators.required, Validators.pattern(/\b[A-Za-z_]{5,30}\b/)]),
+      'state': new FormControl(null, Validators.required),
+      'city': new FormControl(null, Validators.required),
+      'code': new FormControl(null, [Validators.pattern(/\b[A-Za-z_0-9]{1,10}\b/)])
+    });
+
+    this.signUpForm.setValue(this.savedForm);
+  }
+
+
+  onBlur(blur: boolean) {
+
   }
 
   onSubmit() {
-
+    if(this.signUpForm.status === 'VALID') {
+      this.savedForm = this.signUpForm.value;
+      console.log(this.savedForm);
+    }
   }
    
   onReset() {
 
+  }
+
+  onChange() {
+   (<FormGroup>this.signUpForm.get('state').value) = null;
+   (<FormGroup>this.signUpForm.get('city').value) = null;
+  }
+
+  onOpen(controlName: string) {
   }
 }

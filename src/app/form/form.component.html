@@ -1,82 +1,85 @@
 <h2>Basic Details</h2>
 <form class="form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-    <div class="form__group left">
+    <div class="form__group form__group--name">
         <div class="form__control form__first-name">
-            <input type="text" name="Fname" required formControlName="firstName">
+            <input type="text" name="Fname" required formControlName="firstName" a-ngblur="onBlur(true)">
             <label>First Name</label>
         </div>
-        <div class="form__control form__email">
-            <input type="email" name="email" required formControlName="email">
-            <label>Email ID</label>
-        </div>
-        <div class="form__control form__country">
-            <span>Country</span>
-            <select name="country" formControlName="country">
-                <option [value]="null" disabled>Choose your country</option>
-                <option  *ngFor="let country of countries"  [value]="country.value">{{ country.value }}</option>
-            </select>
-        </div>
-        <div class="form__control form__phone">
-            <input type="number" name="phone" required formControlName="phone">
-            <label>Phone Number</label>
-        </div>
-        <div class="form__control form__button--reset">
-            <button type="button" (click)="onReset()">Reset All</button>
-        </div>
-    </div>
-    <div class="form__group right">
         <div class="form__control form__last-name">
             <input type="text" name="Lname" required formControlName="lastName">
             <label>Last Name</label>
+        </div>
+    </div>
+    <div class="form__group form__group--id">
+        <div class="form__control form__email">
+            <input type="text" name="email" required formControlName="email">
+            <label>Email ID</label>
         </div>
         <div class="form__control form__ID">
             <input type="text" name="ID" required formControlName="id">
             <label>Your User ID</label>
         </div>
+    </div>
+    <div class="form__group form__group--location form-group">
+        <div class="form__control form__country">
+            <span>Country</span>
+            <select class="form-control" name="country" formControlName="country" (change)="onChange()" (click)="onOpen('country')">
+                <option [value]="null" disabled>Choose your country</option>
+                <option  *ngFor="let country of countries"  [value]="country.value">{{ country.value }}</option>
+            </select>
+        </div>
         <div class="form__control form__location">
             <div class="form__location--state" [ngSwitch]="this.signUpForm.get('country').value">
                 <span>State</span>
                 <select name="state" formControlName="state" *ngSwitchCase="'USA'">
-                    <option [value]="null" disabled>Choose your state</option>
+                    <option [value]="null" disabled>Choose state</option>
                     <option *ngFor="let state of statesUSA"  [value]="state.value">{{ state.value }}</option>
                 </select>
                 <select name="state" formControlName="state" *ngSwitchCase="'India'">
-                    <option [value]="null" disabled>Choose your state</option>
+                    <option [value]="null" disabled>Choose state</option>
                     <option *ngFor="let state of statesIndia"  [value]="state.value">{{ state.value }}</option>
                 </select>
                 <select name="state" formControlName="state" *ngSwitchCase="undefined">
-                    <option [value]="null" disabled>Choose your state</option>
+                    <option [value]="null" disabled>Choose state</option>
                 </select>
             </div>
             <div class="form__location--city" [ngSwitch]="this.signUpForm.get('state').value">  
-                    <span>State</span>
-                    <select name="city" formControlName="city" *ngSwitchCase="'New York'">
-                        <option [value]="null" disabled>Choose your city</option>
-                        <option *ngFor="let city of citiesNY"  [value]="city.value">{{ city.value }}</option>
-                    </select>
-                    <select name="city" formControlName="city" *ngSwitchCase="'California'">
-                        <option [value]="null" disabled>Choose your city</option>
-                        <option *ngFor="let city of citiesCali"  [value]="city.value">{{ city.value }}</option>
-                    </select>
-                    <select name="city" formControlName="city" *ngSwitchCase="'Andhra Pradesh'">
-                        <option [value]="null" disabled>Choose your city</option>
-                        <option *ngFor="let city of citiesAndhra"  [value]="city.value">{{ city.value }}</option>
-                    </select>
-                    <select name="city" formControlName="city" *ngSwitchCase="'Goa'">
-                        <option [value]="null" disabled>Choose your city</option>
-                        <option *ngFor="let city of citiesGoa"  [value]="city.value">{{ city.value }}</option>
-                    </select>
-                    <select name="city" formControlName="city" *ngSwitchCase="undefined">
-                        <option [value]="null" disabled>Choose your state first</option>
-                    </select>
-                </div>
+                <span>City</span>
+                <select name="city" formControlName="city" *ngSwitchCase="'New York'">
+                    <option [value]="null" disabled>Choose city</option>
+                    <option *ngFor="let city of citiesNY"  [value]="city.value">{{ city.value }}</option>
+                </select>
+                <select name="city" formControlName="city" *ngSwitchCase="'California'">
+                    <option [value]="null" disabled>Choose city</option>
+                    <option *ngFor="let city of citiesCali"  [value]="city.value">{{ city.value }}</option>
+                </select>
+                <select name="city" formControlName="city" *ngSwitchCase="'Andhra Pradesh'">
+                    <option [value]="null" disabled>Choose city</option>
+                    <option *ngFor="let city of citiesAndhra"  [value]="city.value">{{ city.value }}</option>
+                </select>
+                <select name="city" formControlName="city" *ngSwitchCase="'Goa'">
+                    <option [value]="null" disabled>Choose city</option>
+                    <option *ngFor="let city of citiesGoa"  [value]="city.value">{{ city.value }}</option>
+                </select>
+                <select name="city" formControlName="city" *ngSwitchCase="undefined">
+                    <option [value]="null" disabled>Choose city</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form__group form__control--data">
+        <div class="form__control form__phone">
+            <input type="text" name="phone" required formControlName="phone" #phoneInput
+            [imask]="{mask: '+{38}(000)000-00-00'}" [unmask]="true">
+            <label>Phone Number</label>
         </div>
         <div class="form__control form__code">
-            <input type="text" name="code" required formControlName="code">
+            <input type="text" name="code" class="ref-code" formControlName="code" style="text-transform: uppercase;">
             <label>Reference Code</label>
         </div>
-        <div class="form__control form__button--submit">
-            <button type="submit">Continue</button>
-        </div>
+    </div>
+    <div class="form__group form__group--buttons">
+        <a type="button" (click)="onReset()" class="form__group--buttons-reset">Reset All</a>
+        <button type="submit" class="form__group--buttons-submit">Continue</button>
     </div>
 </form>
