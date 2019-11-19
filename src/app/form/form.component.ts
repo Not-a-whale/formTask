@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { storageService } from '../storage-service.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -13,18 +15,6 @@ export class FormComponent implements OnInit {
     new FormControl('India')
   ];
 
-  savedForm: {
-    city: string,
-    code: number,
-    country: string,
-    email: string,
-    firstName: string,
-    id: string,
-    lastName: string,
-    phone: number,
-    state: string;
-  }
-
   statesUSA = [new FormControl('New York'), new FormControl('California')];
   statesIndia = [new FormControl('Andhra Pradesh'), new FormControl('Goa')]
 
@@ -33,49 +23,104 @@ export class FormComponent implements OnInit {
   citiesAndhra = [new FormControl('Visakhapatnam'), new FormControl('Amaravati')];
   citiesGoa = [new FormControl('Panaji'), new FormControl('Vasco da Gama')];
 
-  @ViewChild('phoneInput', {static: false}) phoneInput: ElementRef;
-  public mask:any = {
+  @ViewChild('phoneInput', { static: false }) phoneInput: ElementRef;
+
+  public mask: any = {
     mask: '+{38}(0__)000-00-00',
     lazy: false
   }
 
-  constructor() { }
+  formValid = false;
+
+  public IDColor: string = '#a0a0a0'
+
+  invalidMessages = ['This field is required and has to contain 2-32 cyrillic characters!',
+    'This field is required and has to be a valid email address!',
+    'This is a required field!',
+    'This is a required field! Please enter your telephone number, formated as "0__-___-__-__"',
+    'This field is required and has to contain 2-32 cyrillic characters',
+    'This is a required field! It has to contain from 5 to 30 latin characters and "_"',
+    'This is a required field!',
+    'This is a required field!',
+    'This field has to contain from 1 to 10 latin characters or numbers.'];
+
+  public statusArr: string[] = [];
+
+  constructor(private storageService: storageService, private router: Router) { }
+
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
       'firstName': new FormControl(null, [Validators.required, Validators.pattern(/^[а-яА-ЯёЁіІїЇ]{2,32}$/iu)]),
       'email': new FormControl(null, [Validators.required, Validators.email, Validators.pattern(/^\S{2,255}@\S+\.\S+$/iu)]),
       'country': new FormControl(null, Validators.required),
-      'phone': new FormControl(null),
+      'phone': new FormControl(null, [Validators.required, Validators.pattern(/\b[0-9]{12}\b/)]),
       'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[а-яА-ЯёЁіІїЇ]{2,32}$/iu)]),
       'id': new FormControl(null, [Validators.required, Validators.pattern(/\b[A-Za-z_]{5,30}\b/)]),
       'state': new FormControl(null, Validators.required),
       'city': new FormControl(null, Validators.required),
-      'code': new FormControl(null, [Validators.pattern(/\b[A-Za-z_0-9]{1,10}\b/)])
+      'code': new FormControl(null, Validators.pattern(/\b[A-Za-z_0-9]{1,10}\b/))
     });
 
-    this.signUpForm.setValue(this.savedForm);
+    if (this.storageService.savedForm) this.signUpForm.setValue(this.storageService.savedForm);
+
   }
 
 
-  onBlur(blur: boolean) {
 
+  getColor() {
+    if (this.signUpForm.get('id').pristine == false && this.signUpForm.get('id').status === "VALID") {
+      this.IDColor = 'green';
+    } else {
+      this.IDColor = 'red';
+    }
+    console.log(this.IDColor);
   }
 
   onSubmit() {
-    if(this.signUpForm.status === 'VALID') {
-      this.savedForm = this.signUpForm.value;
-      console.log(this.savedForm);
+    if (this.signUpForm.status === 'VALID') {
+      this.storageService.savedForm = this.signUpForm.value;
+      console.log(this.signUpForm);
+      this.formValid = true;
+      this.router.navigate(['/logined-user']);
+    } else {
+      let namesArr = Object.keys(this.signUpForm.controls);
+      console.log(namesArr);
+      for (let i = 0; i < namesArr.length; i++) {
+        this.statusArr.push(this.signUpForm.controls[namesArr[i]].status);
+      }
+      this.formValid = false;
+      console.log(this.statusArr);
     }
   }
-   
-  onReset() {
 
+  onReset() {
+    let namesArr = Object.keys(this.signUpForm.controls);
+
+    for(let i = 0; i < namesArr.length; i++) {
+      this.signUpForm.controls[namesArr[i]].setValue(null);
+    }
+
+    this.storageService.savedForm = {
+      city: '',
+      code: null,
+      country: '',
+      email: '',
+      firstName: '',
+      id: '',
+      lastName: '',
+      phone: null,
+      state: null
+    }
+
+    this.statusArr = [];
+
+    this.formValid = false;
   }
 
   onChange() {
-   (<FormGroup>this.signUpForm.get('state').value) = null;
-   (<FormGroup>this.signUpForm.get('city').value) = null;
+    (<FormGroup>this.signUpForm.get('state').value) = null;
+    (<FormGroup>this.signUpForm.get('city').value) = null;
   }
 
   onOpen(controlName: string) {

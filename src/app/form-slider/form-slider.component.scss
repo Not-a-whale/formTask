@@ -1,0 +1,123 @@
+.slider__container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 3;
+    display: block;
+    border-bottom-left-radius: 20px;
+
+        &>* {
+            display: block;
+        }
+    
+        &--wavy {
+            display: none;
+
+            @media screen and (min-width: 1000px) {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 9.55rem;
+                width: 100%;
+                background-color: transparent;
+                z-index: 4;
+
+                &-element {
+                    position: absolute;
+                    width: 100%;
+                    display: block;
+                    z-index: 5;
+    
+                    &-1 {
+                        top: 0;
+                        right: 0;
+                        background-color: #48a5ea;
+                        width: 194px;
+                        height: 25%;
+                        border-top-left-radius: 50px;
+                        border-bottom-left-radius: 50px;
+                    }
+                    &-2 {
+                        background-color: #48a5ea;
+                        top: 25%;
+                        width: 100%;
+                        height: 25%;
+    
+                        .concave {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            height: 100%;
+                            width: 18px;
+                            background-color: #f0f0f0;
+                            z-index: 6;
+                            border-top-right-radius: 50px;
+                            border-bottom-right-radius: 50px;
+                        }
+                    }
+                    &-3 {
+                        background-color: #48a5ea;
+                        top: 50%;
+                        right: 0;
+                        width: 177.2px;
+                        height: 25%;
+                        border-top-left-radius: 50px;
+                        border-bottom-left-radius: 50px;
+                    }
+                    &-4 {
+                        background-color: #48a5ea;
+                        top: 75%;
+                        width: 100%;
+                        height: 25%;
+    
+                        .concave {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            height: 100%;
+                            width: 17px;
+                            background-color: #f0f0f0;
+                            z-index: 6;
+                            border-top-right-radius: 100px;
+                            border-bottom-right-radius: 100px;
+                        }
+                    }
+                }
+            }
+        }
+    &--nav {
+        display: block;
+        position: absolute;
+        z-index: 10;
+        top: 10%;
+        bottom: 10%;
+        width: 100%;
+        height: 80%;
+        display: flex;
+        align-items: stretch;
+
+        &-arrow {
+            display: block;
+            width: 3.95rem;
+            height: 3.95rem;
+            z-index: 20;
+
+            i {
+                display: block;
+                width: 3.95rem;
+                height: 3.95rem;
+                color: black;
+            }
+
+        }
+
+        &-dots {
+            display: block;
+            z-index: 20;
+            width: 100%;
+            height: 20%;
+        }
+
+    }
+}
