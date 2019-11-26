@@ -28,7 +28,8 @@
         grid-column: 1 / 3;
         height: 20vh;
         display: block;
-        border-bottom-left-radius: 20px;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
         position: relative;
         z-index: 1;
         @media screen and (min-width: 700px){
@@ -49,6 +50,7 @@
             height: 100%;
             display: block;
             border-bottom-left-radius: 20px;
+            border-top-left-radius: 20px;
             position: relative;
             z-index: 2;
         }

@@ -50,11 +50,12 @@ h2 {
         }
 
         &--buttons {
-            margin-top: 4rem;
+            margin-top: 2rem;
 
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            position: relative;
 
             &-submit {
                 background-color: #48a5ea;
