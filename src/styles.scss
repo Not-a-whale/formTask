@@ -28,8 +28,12 @@ body {
     line-height: 1.6;
     font-family: 'ProximaNovaRegular', sans-serif;
     padding: 1em;
-    font-size: 62.5%;
+    font-size: 50%;
     height: 100%;
+
+    @media screen and (min-width: 700px) {
+        font-size: 62.5%;
+    }
 }
 
 app-root {

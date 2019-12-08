@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { storageService } from 'src/app/storage-service.component';
+
 
 @Component({
   selector: 'app-form-logined-user',
   templateUrl: './form-logined-user.component.html',
   styleUrls: ['./form-logined-user.component.scss']
 })
-export class FormLoginedUserComponent implements OnInit {
+export class FormLoginedUserComponent {
 
-  constructor() { }
+constructor (private storageService: storageService) {}
 
-  ngOnInit() {
-  }
+activeUserFName = this.storageService.savedForm.firstName;
+activeUserLName = this.storageService.savedForm.lastName;
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { showStateTrigger } from './animations';
 
 @Component({
@@ -7,7 +7,7 @@ import { showStateTrigger } from './animations';
   styleUrls: ['./app.component.scss'],
   animations: [showStateTrigger]
 })
-export class AppComponent  {
+export class AppComponent   {
   title = 'AwesomeFormTask';
 
   @ViewChild("modal", {static: false}) modal: ElementRef;
@@ -16,9 +16,7 @@ export class AppComponent  {
 
   formComponent: any;
 
-//  subscription = this.formComponent.subscribe();
-
-  clickedState: boolean;
+  clickedState: boolean = false;
 
   clickedStateFunction(componentRef) {
     this.formComponent = componentRef;

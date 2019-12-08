@@ -121,8 +121,13 @@
         &-arrow {
             display: block;
             z-index: 20;
+            cursor: pointer;
 
             i {
+                &:hover {
+                    color: goldenrod;
+                }
+
                 color: #fff;
 
                 @media screen and (max-width: 700px) {
@@ -202,13 +207,13 @@
                     background-color: #fff;
                     position: absolute;
                     top: 0;
-                    right: 0;
-                    transform: translate(-50%, -50%);
+                    left: 0;
+                    transform: translate(-25%, -50%);
 
                     @media screen and (min-width: 700px) {
                         top: 0;
-                        right: 0;
-                        transform: translate(-25%, -25%);
+                        left: 0;
+                        transform: translate(58%, -25%);
                     }
                 }
             }

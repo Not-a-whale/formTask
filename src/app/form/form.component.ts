@@ -117,7 +117,8 @@ export class FormComponent implements OnInit {
       this.storageService.savedForm = this.signUpForm.value;
       console.log(this.signUpForm);
       this.formValid = true;
-      this.router.navigate(["/logined-user"]);
+      this.storageService.formValidation(true);
+      alert('Form Saved!')
     } else {
       let namesArr = Object.keys(this.signUpForm.controls);
       console.log(namesArr);

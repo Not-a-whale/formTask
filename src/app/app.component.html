@@ -7,7 +7,7 @@
         <router-outlet (activate)="clickedStateFunction($event)"></router-outlet>
     </div>
     <div class="modal modal__backdrop" 
-    [ngStyle]="{display: clickedState ? 'block' : 'none'}" 
+    *ngIf="clickedState"
     #modal 
     (click)="closedModal($event)"
     @showState>

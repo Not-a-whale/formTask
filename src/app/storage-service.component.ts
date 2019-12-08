@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Subject } from 'rxjs';
 
 
 
@@ -8,6 +9,11 @@ import { Injectable } from "@angular/core";
 })
 
 export class storageService {
+
+    public componentChanged = new Subject<string>();
+
+    public isFormValid = new Subject<boolean>();
+
 
     public savedForm: {
         city: string,
@@ -20,5 +26,13 @@ export class storageService {
         phone: number,
         state: string;
       };
+
+    componentActive(componentName: string) {
+        this.componentChanged.next(componentName);
+    }
+
+    formValidation(isVal: boolean) {
+        this.isFormValid.next(isVal);
+    }
 
 }
