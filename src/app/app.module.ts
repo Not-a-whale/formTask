@@ -8,6 +8,7 @@ import { FormLoginedUserComponent } from './form/form-logined-user/form-logined-
 import { FormSliderComponent } from './form-slider/form-slider.component';
 import { IMaskModule } from 'angular-imask';
 import { Routes, RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
     BrowserModule,
     ReactiveFormsModule,
     IMaskModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

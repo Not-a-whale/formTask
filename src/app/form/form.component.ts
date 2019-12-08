@@ -3,11 +3,13 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  Injectable
+  Output, 
+  EventEmitter
 } from "@angular/core";
 import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
 import { storageService } from "../storage-service.component";
 import { Router } from "@angular/router";
+
 
 @Component({
   selector: "app-form",
@@ -35,12 +37,15 @@ export class FormComponent implements OnInit {
 
   @ViewChild("phoneInput", { static: false }) phoneInput: ElementRef;
 
+  @Output() formReseted = new EventEmitter<boolean>();
+
   public mask: any = {
     mask: "+{38}(0__)000-00-00",
     lazy: false
   };
 
   formValid = false;
+
 
   DeleteMessage = 'Are you sure you want to reset the form? Click "Continue" if you aren\'t sure about that. Click again to reset the form.'
 
@@ -125,7 +130,11 @@ export class FormComponent implements OnInit {
   }
 
   onReset() {
-      
+    this.formReseted.emit(true);
+  }
+
+  resetForm (action: boolean) {
+    if(action) {
       let namesArr = Object.keys(this.signUpForm.controls);
 
       for (let i = 0; i < namesArr.length; i++) {
@@ -147,12 +156,40 @@ export class FormComponent implements OnInit {
       this.statusArr = [];
 
       this.formValid = false;
+
+      this.IDColor = '#a0a0a0';
+
+      (<boolean>this.signUpForm.get("firstName").touched) = false;
+      (<boolean>this.signUpForm.get('firstName').pristine) = true;
+
+      (<boolean>this.signUpForm.get("id").touched) = false;
+      (<boolean>this.signUpForm.get('id').pristine) = true;
+
+      (<boolean>this.signUpForm.get("email").touched) = false;
+      (<boolean>this.signUpForm.get('email').pristine) = true;
+
+      (<boolean>this.signUpForm.get("country").touched) = false;
+      (<boolean>this.signUpForm.get('country').pristine) = true;
+
+      (<boolean>this.signUpForm.get("phone").touched) = false;
+      (<boolean>this.signUpForm.get('phone').pristine) = true;
+
+      (<boolean>this.signUpForm.get("lastName").touched) = false;
+      (<boolean>this.signUpForm.get('lastName').pristine) = true;
+
+      (<boolean>this.signUpForm.get("state").touched) = false;
+      (<boolean>this.signUpForm.get('state').pristine) = true;
+
+      (<boolean>this.signUpForm.get("city").touched) = false;
+      (<boolean>this.signUpForm.get('city').pristine) = true;
+      
+      (<boolean>this.signUpForm.get("code").touched) = false;
+      (<boolean>this.signUpForm.get('code').pristine) = true;
+    }
   }
 
   onChange() {
     (<FormGroup>this.signUpForm.get("state").value) = null;
     (<FormGroup>this.signUpForm.get("city").value) = null;
   }
-
-  onOpen(controlName: string) {}
 }

@@ -99,7 +99,6 @@
         name="country"
         formControlName="country"
         (change)="onChange()"
-        (click)="onOpen('country')"
       >
         <option [value]="null" disabled>Choose your country</option>
         <option *ngFor="let country of countries" [value]="country.value">{{

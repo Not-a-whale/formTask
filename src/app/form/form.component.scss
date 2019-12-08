@@ -13,7 +13,7 @@ h2 {
 
 .form {
     display: flex;
-    margin: 3rem 1.8rem 1.8rem 1.8rem;
+    margin: 6rem 1.8rem 1.8rem 1.8rem;
     padding: 0;
     flex-direction: column;
 
@@ -50,12 +50,15 @@ h2 {
         }
 
         &--buttons {
-            margin-top: 2rem;
-
+            margin-top: 4rem;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             position: relative;
+
+            @media (min-width: 700px) {
+                margin-top: 8rem;
+            }
 
             &-submit {
                 background-color: #48a5ea;
@@ -171,7 +174,7 @@ h2 {
                 top: -.2rem;
                 left: 0;
                 font-size: .8rem;
-                color: #b8b8b8;
+                color: #807272;
             }
 
             &:focus {

@@ -4,7 +4,25 @@
         <app-form-slider class="slider-app"></app-form-slider>
     </div>
     <div class="form">
-        <router-outlet></router-outlet>
+        <router-outlet (activate)="clickedStateFunction($event)"></router-outlet>
+    </div>
+    <div class="modal modal__backdrop" 
+    [ngStyle]="{display: clickedState ? 'block' : 'none'}" 
+    #modal 
+    (click)="closedModal($event)"
+    @showState>
+      <div class="modal__content">
+        <div class="modal__content--header">
+          <span class="modal__content--header-close" #closeSharp>&times;</span>
+          <p>WARNING!</p>
+        </div>
+        <div class="modal__content--text">
+          <p>If you click 'continue' the all information will be deleted. <br>Close this window if you don't want this to happen.</p>
+        </div>
+        <div class="modal__content--button">
+          <button class="modal__content--button-btn" #continueButton>Continue</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

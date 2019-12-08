@@ -75,5 +75,95 @@
             display: none;
         }
     }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 99;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+
+        &__content {
+            background-color: #fff;
+            margin: 20% auto;
+            width: 50vw;
+            box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            &--header {
+                font-size: 1.6rem;
+                position: relative;
+                background-color: #48a5ea;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                p {
+                    text-align: center;
+                    color: #fff;
+                }
+
+                span {
+                    position: absolute;
+                    top: 0;
+                    right: 2%;
+                    color: #fff;
+                    transition: .4s all ease;
+
+                    &:hover {
+                        color: #000000;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &--text {
+                width: 100%;
+                padding: 1rem;
+
+                p {
+                    color: #000;
+                    font-size: 1.4rem;
+                }
+            }
+
+            &--button {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                button {
+                    margin-bottom: .5rem;
+                    background-color: #48a5ea;
+                    height: 3rem;
+                    width: 7rem;
+                    color: #fff;
+                    font-size: 1rem;
+                    text-align: center;
+                    line-height: 1rem;
+                    border-radius: 5rem;
+                    cursor: pointer;
+                    transition: all .5s ease;
+                    padding: 0;
+                    border: none;
+                    outline: none;
+
+                    &:hover {
+                        transform: scale(1.02);
+                        box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, .3);
+                    }
+    
+                    &:active {
+                        transform: scale(0.95);
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+    }
 }
 
