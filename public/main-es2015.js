@@ -530,26 +530,28 @@ let FormSliderComponent = class FormSliderComponent {
     constructor(storageService, router) {
         this.storageService = storageService;
         this.router = router;
-        this.componentActiveName = 'default';
+        this.componentActiveName = "default";
     }
     ngOnInit() {
-        this.componentChangedSub = this.storageService.componentChanged
-            .subscribe((componentName) => {
+        this.componentChangedSub = this.storageService.componentChanged.subscribe(componentName => {
             this.componentActiveName = componentName;
             console.log(this.componentActiveName);
         });
-        this.isLoginFormValidSub = this.storageService.isFormValid.subscribe((isVal) => {
+        this.isLoginFormValidSub = this.storageService.isFormValid.subscribe(isVal => {
             this.formValidity = isVal;
         });
     }
     moveUp() {
-        this.router.navigate(["/form"]);
-        this.storageService.componentActive('default');
+        if (this.formValidity) {
+            this.router.navigate(["/form"]);
+            this.storageService.componentActive("default");
+        }
     }
     moveDown() {
-        if (this.formValidity)
+        if (this.formValidity) {
             this.router.navigate(["/logined-user"]);
-        this.storageService.componentActive('loginedUser');
+            this.storageService.componentActive("loginedUser");
+        }
     }
 };
 FormSliderComponent.ctorParameters = () => [
@@ -558,7 +560,7 @@ FormSliderComponent.ctorParameters = () => [
 ];
 FormSliderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-form-slider',
+        selector: "app-form-slider",
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./form-slider.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/form-slider/form-slider.component.html")).default,
         animations: [_animations__WEBPACK_IMPORTED_MODULE_3__["componentChangedState"]],
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./form-slider.component.scss */ "./src/app/form-slider/form-slider.component.scss")).default]
@@ -792,6 +794,8 @@ let FormComponent = class FormComponent {
             this.signUpForm.get('city').pristine = true;
             this.signUpForm.get("code").touched = false;
             this.signUpForm.get('code').pristine = true;
+            this.storageService.formValidation(false);
+            this.storageService.componentActive('default');
         }
     }
     onChange() {

@@ -553,12 +553,11 @@
                 function FormSliderComponent(storageService, router) {
                     this.storageService = storageService;
                     this.router = router;
-                    this.componentActiveName = 'default';
+                    this.componentActiveName = "default";
                 }
                 FormSliderComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    this.componentChangedSub = this.storageService.componentChanged
-                        .subscribe(function (componentName) {
+                    this.componentChangedSub = this.storageService.componentChanged.subscribe(function (componentName) {
                         _this.componentActiveName = componentName;
                         console.log(_this.componentActiveName);
                     });
@@ -567,13 +566,16 @@
                     });
                 };
                 FormSliderComponent.prototype.moveUp = function () {
-                    this.router.navigate(["/form"]);
-                    this.storageService.componentActive('default');
+                    if (this.formValidity) {
+                        this.router.navigate(["/form"]);
+                        this.storageService.componentActive("default");
+                    }
                 };
                 FormSliderComponent.prototype.moveDown = function () {
-                    if (this.formValidity)
+                    if (this.formValidity) {
                         this.router.navigate(["/logined-user"]);
-                    this.storageService.componentActive('loginedUser');
+                        this.storageService.componentActive("loginedUser");
+                    }
                 };
                 return FormSliderComponent;
             }());
@@ -583,7 +585,7 @@
             ]; };
             FormSliderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-                    selector: 'app-form-slider',
+                    selector: "app-form-slider",
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./form-slider.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/form-slider/form-slider.component.html")).default,
                     animations: [_animations__WEBPACK_IMPORTED_MODULE_3__["componentChangedState"]],
                     styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./form-slider.component.scss */ "./src/app/form-slider/form-slider.component.scss")).default]
@@ -798,6 +800,8 @@
                         this.signUpForm.get('city').pristine = true;
                         this.signUpForm.get("code").touched = false;
                         this.signUpForm.get('code').pristine = true;
+                        this.storageService.formValidation(false);
+                        this.storageService.componentActive('default');
                     }
                 };
                 FormComponent.prototype.onChange = function () {

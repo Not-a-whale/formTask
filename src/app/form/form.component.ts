@@ -186,6 +186,10 @@ export class FormComponent implements OnInit {
       
       (<boolean>this.signUpForm.get("code").touched) = false;
       (<boolean>this.signUpForm.get('code').pristine) = true;
+
+      this.storageService.formValidation(false);
+
+      this.storageService.componentActive('default');
     }
   }
 
