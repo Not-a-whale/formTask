@@ -131,7 +131,7 @@ export class FormComponent implements OnInit {
   }
 
   onReset() {
-    this.formReseted.emit(true);
+    this.storageService.formReseted.next(true);
   }
 
   resetForm (action: boolean) {

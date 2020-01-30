@@ -14,6 +14,8 @@ export class storageService {
 
     public isFormValid = new Subject<boolean>();
 
+    public formReseted = new Subject<boolean>();
+
 
     public savedForm: {
         city: string,

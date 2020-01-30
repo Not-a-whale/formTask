@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { showStateTrigger } from './animations';
+import { storageService } from './storage-service.component';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,11 @@ export class AppComponent   {
 
   clickedState: boolean = false;
 
+  constructor (private storageService: storageService) {}
+
   clickedStateFunction(componentRef) {
     this.formComponent = componentRef;
-    this.formComponent.formReseted.subscribe((data) => {
+    this.formComponent.storageService.formReseted.subscribe((data) => {
       this.clickedState = data;
     });
   }

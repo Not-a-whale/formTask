@@ -36,6 +36,7 @@
     "@types/node": "~8.9.4",
     "bootstrap": "^4.3.1",
     "codelyzer": "^5.0.0",
+    "firebase-cli": "^1.2.0",
     "font-awesome": "^4.7.0",
     "imask": "^5.2.1",
     "jasmine-core": "~3.4.0",
